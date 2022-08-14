@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+int main(){
+    int n, count, i, j, k;
+    float avg_wt=0, avg_tat=0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    int bt[n], wt[n], tat[n];
+
+    printf("Enter brust times of n processes: \n");
+    for(i = 0; i<n; i++){
+        scanf("%d", &bt[i]);
+    }
+    wt[0]= 0;
+    for(j=0; j<n-1; j++){
+        wt[j+1]= wt[j]+ bt[j];
+        avg_wt += wt[j+1];
+    }
+    for(k= 0; k<n; k++){
+        tat[k]= wt[k]+bt[k];
+        avg_tat += tat[k];
+    }
+    printf("Processes   Brust_time  Waiting_time    Turn_around_time\n");
+    for(i= 0; i<n; i++){
+        printf("%d\t\t%d\t\t%d\t\t%d\n", i+1, bt[i], wt[i], tat[i]);
+    }
+    printf("Average Waiting time= %f\n", avg_wt/n);
+    printf("Average Turn around time= %f", avg_tat/n);
+    return 0;
+}
+
+
+OUTPUT:
+
+Enter number of processes: 4
+Enter brust times of n processes:
+6
+5
+5
+3
+Processes   Brust_time  Waiting_time    Turn_around_time
+1               6               0               6
+2               5               6               11
+3               5               11              16
+4               3               16              19
+Average Waiting time= 8.250000
+Average Turn around time= 13.000000
